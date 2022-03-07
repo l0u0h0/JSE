@@ -118,14 +118,25 @@ console.log(abc);
 console.log(abc.last());
 ```
 
-- <u> 비슷한 로직의 여러 함수가 사용되면 메모리에 할당이 가기에</u>
+- <u> 비슷한 로직의 여러 함수가 사용되면 메모리에 할당되기에 효율적인 메모리를 위해</u>
 
 ```javascript
-function user(first, last) {
+function User(first, last) {
   this.firstName = first;
   this.lastName = last;
 }
-const lee = new user("uhan", "lee");
+const lee = new User("uhan", "lee");
 ```
 
 `new` 로 생성된 함수를 <u>생성자 함수</u>라 한다.
+
+- prototype
+
+```javascript
+User.prototype.getFullName() = function () {
+  return `${this.firstName} ${this.lastName}`
+}
+```
+
+`User` 에 숨어있는 `prototype` 이라는 속성에 `getFullName` 을 할당해주어서 동일한 로직의 기능을 수행하게 해준다.  
+참조한다는 개념.
