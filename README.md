@@ -99,7 +99,7 @@ function func() {
 
 ### 생성자
 
-- <u></u>
+- <u>this는 해당 객체를 의미, 객체의 이름이 바뀔 수 있기에 this로 명시</u>
 
 ```javascript
 const abc = {
@@ -111,3 +111,21 @@ const abc = {
 };
 console.log(abc);
 ```
+
+- <u>first와 second가 같이 등장</u>
+
+```javascript
+console.log(abc.last());
+```
+
+- <u> 비슷한 로직의 여러 함수가 사용되면 메모리에 할당이 가기에</u>
+
+```javascript
+function user(first, last) {
+  this.firstName = first;
+  this.lastName = last;
+}
+const lee = new user("uhan", "lee");
+```
+
+`new` 로 생성된 함수를 <u>생성자 함수</u>라 한다.
