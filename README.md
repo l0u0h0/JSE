@@ -140,3 +140,96 @@ User.prototype.getFullName() = function () {
 
 `User` 에 숨어있는 `prototype` 이라는 속성에 `getFullName` 을 할당해주어서 동일한 로직의 기능을 수행하게 해준다.  
 참조한다는 개념.
+
+---
+
+<br/>
+
+### this
+
+- 일반 함수는 호출 위치에 따라 this 정의  
+  화살표 함수는 자신이 선언된 함수 범위에서 this 정의
+
+```javascript
+const func = {
+  name: "hello",
+  normal: function () {
+    console.log(this.name);
+  },
+  arrow: function () {
+    console.log(this.name);
+  },
+};
+func.normal();
+func.arrow();
+```
+
+`normal()` 로 선언된 부분은 제대로 콘솔에 찍히지만  
+`arrow()` 로 선언된 부분은 `undefined` 로 출력
+
+```javascript
+const abc = {
+  name: "lee",
+  normal: func.normal,
+  arrow: func.arrow,
+};
+abc.normal();
+abc.arrow();
+```
+
+`normal()` 을 호출할 때 연결된 객체는 `abc` 이므로  
+이를 `this` 로 보고 위와 동일하게 출력
+`arrow()` 도 마찬가지로 `undefined` 로 출력
+
+```javascript
+function User(name) {
+  this.name = name;
+}
+User.prototype.normal = function () {
+  console.log(this.name);
+};
+User.prototype.arrow = function () {
+  console.log(this.name);
+};
+const name = new User("uhan");
+name.normal();
+name.arrow();
+```
+
+- 화살표 함수로 출력 가능한 예
+
+```javascript
+const timer = {
+  name: 'uhan!',
+  timeout; function () {
+    setTimeout(() => {
+      console.log(this.name);
+    }, 2000)
+  }
+}
+timer.timeout();
+```
+
+호출된 함수가 자신의 범위 내에 있어서 가능가능
+
+---
+
+<br/>
+
+### ES6 클래스 패턴
+
+- `prototype` 으로 가져왔던 부분을 `constructor` 를 사용해 구현
+
+```javascript
+class User {
+  constructor(first, last) {
+    this.firstName = first;
+    this.lastName = last;
+  }
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+}
+const one = new User("one", "Soju");
+console.log(one.getFullName());
+```

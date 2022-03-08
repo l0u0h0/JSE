@@ -64,3 +64,76 @@ console.log(amy)
 console.log(neo)
 console.log(heropy1.getFullName())
 
+const heropy2 = {
+  name: 'Heropy',
+  normal: function () {
+    console.log(this.name)
+  },
+  arrow: () => {
+    console.log(this.name)
+  }
+}
+heropy2.normal()
+heropy2.arrow()
+
+const amy1 = {
+  name: 'Amy',
+  normal: heropy2.normal,
+  arrow: heropy2.arrow
+}
+amy1.normal()
+amy1.arrow()
+
+function User1(name) {
+  this.name = name
+}
+User1.prototype.normal = function () {
+  console.log(this.name)
+}
+User1.prototype.arrow = function () {
+  console.log(this.name)
+}
+
+const lee = new User1('lee')
+
+lee.normal()
+lee.arrow()
+
+const timer = {
+  name: 'uhan!',
+  timeout: function () {
+    setTimeout(() => {
+      console.log(this.name)
+    }, 2000)
+  }
+}
+timer.timeout()
+
+const hello = {
+  name: 'hello',
+  normal() {
+    console.log(this.name)
+  },
+  arrow: () => {
+    console.log(this.name)
+  }
+}
+hello.normal()
+hello.arrow()
+
+class Use {
+  constructor(first, last) {
+    this.firstName = first
+    this.lastName = last
+  }
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`
+  }
+}
+const one = new Use('one', 'Park')
+const two = new Use('two', 'cow')
+const three = new Use('three', 'Tree')
+
+console.log(one)
+console.log(two.getFullName())
+console.log(three.getFullName())

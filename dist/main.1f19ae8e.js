@@ -118,6 +118,14 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
+var _this = this;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
 var double = function double(x) {
   return x * 2;
 };
@@ -194,6 +202,87 @@ console.log(heropy1);
 console.log(amy);
 console.log(neo);
 console.log(heropy1.getFullName());
+var heropy2 = {
+  name: 'Heropy',
+  normal: function normal() {
+    console.log(this.name);
+  },
+  arrow: function arrow() {
+    console.log(_this.name);
+  }
+};
+heropy2.normal();
+heropy2.arrow();
+var amy1 = {
+  name: 'Amy',
+  normal: heropy2.normal,
+  arrow: heropy2.arrow
+};
+amy1.normal();
+amy1.arrow();
+
+function User1(name) {
+  this.name = name;
+}
+
+User1.prototype.normal = function () {
+  console.log(this.name);
+};
+
+User1.prototype.arrow = function () {
+  console.log(this.name);
+};
+
+var lee = new User1('lee');
+lee.normal();
+lee.arrow();
+var timer = {
+  name: 'uhan!',
+  timeout: function timeout() {
+    var _this2 = this;
+
+    setTimeout(function () {
+      console.log(_this2.name);
+    }, 2000);
+  }
+};
+timer.timeout();
+var hello = {
+  name: 'hello',
+  normal: function normal() {
+    console.log(this.name);
+  },
+  arrow: function arrow() {
+    console.log(_this.name);
+  }
+};
+hello.normal();
+hello.arrow();
+
+var Use = /*#__PURE__*/function () {
+  function Use(first, last) {
+    _classCallCheck(this, Use);
+
+    this.firstName = first;
+    this.lastName = last;
+  }
+
+  _createClass(Use, [{
+    key: "getFullName",
+    value: function getFullName() {
+      return "".concat(this.firstName, " ").concat(this.lastName);
+    }
+  }]);
+
+  return Use;
+}();
+
+var one = new Use('one', 'Park');
+var two = new Use('two', 'cow');
+var three = new Use('three', 'Tree');
+console.log(one);
+console.log(two.getFullName());
+console.log(three.getFullName());
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -222,7 +311,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49810" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49330" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
