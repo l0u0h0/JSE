@@ -137,3 +137,25 @@ const three = new Use('three', 'Tree')
 console.log(one)
 console.log(two.getFullName())
 console.log(three.getFullName())
+
+class Vehicle {
+  constructor(name, wheel) {
+    this.name = name
+    this.wheel = wheel
+  }
+}
+
+const myVehicle = new Vehicle('운송수단', 2)
+console.log(myVehicle)
+
+class Bicycle extends Vehicle {
+  constructor(name, wheel) {
+    super(name, wheel)
+  }
+}
+class Car extends Vehicle {
+  constructor(name, wheel, license) {
+    super(name, wheel)
+    this.license = license
+  }
+}

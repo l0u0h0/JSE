@@ -233,3 +233,30 @@ class User {
 const one = new User("one", "Soju");
 console.log(one.getFullName());
 ```
+
+---
+
+<br/>
+
+### extends - 상속(확장)
+
+- `super` 는 확장된 클래스를 의미
+
+```javascript
+class Bicycle extends Vehicle {
+  constructor(name, wheel) {
+    super(name, wheel);
+  }
+}
+```
+
+에서 `super`는 `Vehicle`을 해당 위치에서 실행한다는 의미
+
+```javascript
+class Car extends Vehicle {
+  constructor(name, wheel, license) {
+    super(name, wheel);
+    this.license = license;
+  }
+}
+```
