@@ -324,3 +324,89 @@ new Promise((resolve, reject) => {
 - `catch`는 가장 가까이에 있는 에러를 잡아준다.
 - `then` 구문에서의 `value`는 아무것도 담겨있지 않다. `resolve`가 된 적이 업기 때문
 - `resolve`, `reject`의 순서를 바꾼다면 `reject`는 실행되지 않는다.
+
+---
+
+```js
+new Promise((resolve, reject) => {
+  console.log("before Timeout");
+  setTimeout(() => {
+    resolve(Math.random());
+    console.log("after resolve");
+  }, 1000);
+})
+  .then((value) => {
+    console.log("value", value);
+  })
+  .then(() => {
+    console.log("then 2");
+  })
+  .then(() => {
+    console.log("then 3");
+  });
+```
+
+- `then` 구문이 순차적으로 출력됨.
+
+```js
+function returnPromiseForTimeout() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(Math.random());
+      console.log("after resolve");
+    }, 1000);
+  });
+}
+
+returnPromiseForTimeout()
+  .then((value) => {
+    console.log("value", value);
+    return returnPromiseForTimeout();
+  })
+  .then((value) => {
+    console.log("then 2");
+    console.log("value", value);
+    return returnPromiseForTimeout();
+  })
+  .then((value) => {
+    console.log("then 3");
+    console.log("value", value);
+    return returnPromiseForTimeout();
+  });
+
+returnPromiseForTimeout();
+```
+
+- 순차적인 `then` 체인 안에서 각각 프로미스객체를 리턴하면  
+  해당 객체가 `resolve` 될때까지 순차적으로 기다렷다가 실행됨.
+
+### async, await
+
+```js
+/**
+ *
+ * @param {number} duration
+ */
+async function sleep(duration) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(undefined);
+    }, duration);
+  });
+}
+
+async function main() {
+  console.log("1");
+  await sleep(1000);
+  console.log("2");
+  await sleep(1000);
+  console.log("3");
+  await sleep(1000);
+  console.log("finish");
+}
+
+main();
+```
+
+- `async`, `await`
+- `await`은 `async` 함수를 기다려줄 수 있다.
