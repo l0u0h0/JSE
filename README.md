@@ -265,6 +265,18 @@ class Car extends Vehicle {
 
 - 비동기적 처리를 할 때 콜백 방식으로 처리르 하게 되는데 프로미스를 사용하게 되면  
   비동기 메서드에서 동기 메서드처럼 값을 반환할 수 있다.
+- 내용은 실행되었지만 아직 결과를 반환하지 않은 객체.
+- 3가지 상태를 갖는다.
+  - `pending`
+    - 아직 완료되지 않은 상태
+  - `fulfilled`
+    - 완료된 상태
+  - `rejected`
+    - 에러가 발생한 상태
+- `fulfilled` 상태면 `resolve`를 반환하고  
+  `resolve`가 반환되면 `then` 구문을 통해 반환된다.
+- `rejected` 상태면 `reject`를 반환하고  
+  `reject`가 반환되면 `catch` 구문을 통해 반환된다.
 
 ```js
 new Promise((resolve, reject) => {
@@ -382,6 +394,10 @@ returnPromiseForTimeout();
 
 ### async, await
 
+- 콜백이나 프로미스의 단점을 보완하고자 나온 비동기 처리 문법
+- `await`는 `async` 함수 안에서만 동작할 수 있다.
+- 프로미스와는 달리 에러를 핸들링할 수 없기에 `try-catch`문 안에서 사용하는 것이 좋다.
+
 ```js
 /**
  *
@@ -410,3 +426,13 @@ main();
 
 - `async`, `await`
 - `await`은 `async` 함수를 기다려줄 수 있다.
+
+### Promise / async-await 차이점
+
+- 가독성
+  - 프로미스는 `.then()`이 계속 펼쳐질 수 있다.
+  - 코드가 길어질수록 `async-await`가 가독성이 좋다.
+  - `async-await`은 비동기 처리 코드가 동기 처리 코드처럼 읽히게 해준다.
+- 에러
+  - 프로미스는 `reject`로 에러를 캐치해줄 수 있지만
+  - `async-await`는 그러한 기능이 없기에 `try-catch()`문을 사용해야한다.
