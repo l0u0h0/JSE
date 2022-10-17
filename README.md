@@ -260,3 +260,67 @@ class Car extends Vehicle {
   }
 }
 ```
+
+### Promise
+
+- 비동기적 처리를 할 때 콜백 방식으로 처리르 하게 되는데 프로미스를 사용하게 되면  
+  비동기 메서드에서 동기 메서드처럼 값을 반환할 수 있다.
+
+```js
+new Promise((resolve, reject) => {
+  resolve();
+  reject();
+});
+```
+
+- `resolve`가 이루어지면 프로미스는 그 다음 단계로 진행할 수 있게 된다.
+
+```js
+new Promise((resolve, reject) => {
+  resolve("hello");
+  reject();
+}).then((value) => {
+  console.log(value);
+});
+```
+
+- `then` 구문으로 안에 담긴 `value`가 전달되어 넘어간다.
+
+---
+
+```js
+new Promise((resolve, reject) => {
+  console.log("inside Promise");
+  reject(new Error("First reject"));
+  resolve("First resolve");
+})
+  .then((value) => {
+    console.log("inside then");
+    console.log(value);
+  })
+  .catch((err) => {
+    console.log("error", err);
+  });
+```
+
+- `reject`를 호출하게 되면 `then` 구문을 건너뛰고 에러가 캐치된다.
+
+```js
+new Promise((resolve, reject) => {
+  console.log("inside Promise");
+  reject(new Error("First reject"));
+  resolve("First resolve");
+})
+  .catch((err) => {
+    console.log("error", err);
+  })
+  .then((value) => {
+    console.log("inside then");
+    console.log(value);
+  });
+```
+
+- `catch`된 이후에 `then` 구문이 실행된다.
+- `catch`는 가장 가까이에 있는 에러를 잡아준다.
+- `then` 구문에서의 `value`는 아무것도 담겨있지 않다. `resolve`가 된 적이 업기 때문
+- `resolve`, `reject`의 순서를 바꾼다면 `reject`는 실행되지 않는다.
